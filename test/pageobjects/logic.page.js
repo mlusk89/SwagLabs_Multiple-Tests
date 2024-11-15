@@ -76,12 +76,52 @@ class LogicPage extends Page {
         return $('[name="checkout"]')
     }
 
-    async login (username, password) {
+    async hmLogin (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnLogin.click();
         await expect(browser.url("https://www.saucedemo.com/inventory.html"));
+        await this.btnItem.click();
+        await expect(browser.url("https://www.saucedemo.com/inventory-item.html?id=4"));
+        await this.btnAdd1.click();
+        await expect(this.cartBadge).isExisting;
+        await this.btnHm.click();
+        await this.btnReset.click();
+        await this.btnAllItems.click();
+        await expect(browser.url("https://www.saucedemo.com/inventory-item.html?id=4"));
+        await this.btnHm.click();
+        await this.btnLogout.click();
+        await expect(browser.url("https://www.saucedemo.com/"));
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.btnLogin.click();
+        await expect(browser.url("https://www.saucedemo.com/inventory.html"));
+        await this.btnHm.click();
+        await this.btnAbout.click();
+        await expect(browser.url("https://saucelabs.com/"))
     }
+
+    async cartLogin(username, password) {
+        await this.inputUsername.setValue(username);
+        await this.inputPassword.setValue(password);
+        await this.btnLogin.click();
+        await expect(browser.url("https://www.saucedemo.com/inventory.html"));
+        await this.btnAdd2.click();
+        await expect(this.cartBadge).toHaveText([expect.stringContaining("1")]);
+        await this.btnAdd3.click();
+        await expect(this.cartBadge).toHaveText([expect.stringContaining("2")]);
+        await this.btnRmv.click();
+        await expect(this.cartBadge).toHaveText([expect.stringContaining("1")]);
+        await this.btnCart.click();
+        await expect(browser.url("https://www.saucedemo.com/cart.html"));
+        await this.btnContinue.click()
+        await expect(browser.url("https://www.saucedemo.com/inventory.html"));
+        await this.btnCart.click();
+        await expect(browser.url("https://www.saucedemo.com/cart.html"));
+        await this.btnCheckout.click();
+        await expect(browser.url("https://www.saucedemo.com/checkout-step-one.html"))
+    }
+
 
    
   

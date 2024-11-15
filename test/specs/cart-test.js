@@ -5,7 +5,7 @@ describe('My cart test application', () => {
         it('should run all cart functions', async () => {
             
             await LogicPage.open()
-            await LogicPage.login('standard_user','secret_sauce')
+            await LogicPage.cartLogin('standard_user','secret_sauce')
             
         });
 });
