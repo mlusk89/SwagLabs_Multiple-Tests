@@ -76,7 +76,7 @@ class LogicPage extends Page {
         return $('[name="checkout"]')
     }
 
-    async hmLogin (username, password) {
+    async hmFunctions(username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnLogin.click();
@@ -101,7 +101,7 @@ class LogicPage extends Page {
         await expect(browser.url("https://saucelabs.com/"))
     }
 
-    async cartLogin(username, password) {
+    async cartFunctions(username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnLogin.click();
